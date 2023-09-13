@@ -1,8 +1,8 @@
 <li [ngClass]="{'completed': task.completed, 'editing': editing}">
   <div class="view">
-    <input class="toggle" type="checkbox" [checked]="task.completed" />
+    <input class="toggle" type="checkbox" [checked]="task.completed" (click)="checkTask()" />
     <label>{{ task.title }}</label>
-    <button class="destroy"></button>
+    <button class="destroy" (click)="deleteTask()"></button>
   </div>
   <input class="edit" [value]="task.title">
 </li>

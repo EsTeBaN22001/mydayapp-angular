@@ -59,5 +59,36 @@ export class TasksService {
     return 'Hubo un problema al crear la tarea'
 
   }
+
+  changeStatus(task: Task): string | null{
+    
+    const currentTasks = this.tasksBS.value
+
+    const taskIndex = currentTasks.findIndex( t => t.id == task.id)
+
+    if(taskIndex != -1){
+
+      currentTasks[taskIndex].completed = !currentTasks[taskIndex].completed
+
+      this.tasksBS.next(currentTasks)
+      this.localStorageService.setItem(this.tasksBS.value)
+
+      return null
+
+    }
+
+    return 'Hubo un problema al cambiar el estado de la tarea'
+
+  }
+
+  deleteTask(taskId: string){
+    
+    const currentTasks = this.tasksBS.value
+    const updatedTasks = currentTasks.filter( t => t.id != taskId)
+
+    this.tasksBS.next(updatedTasks)
+    this.localStorageService.setItem(this.tasksBS.value)
+
+  }
   
 }
