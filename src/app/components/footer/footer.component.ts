@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { TasksService } from './../../services/tasks.service';
 import { Router } from '@angular/router';
+import { Filter } from './../../interfaces/filter';
 
 @Component({
   selector: 'app-footer',
@@ -14,7 +15,7 @@ export class FooterComponent {
     private router: Router
   ){}
   
-  setFilter(filter: string){
+  setFilter(filter: Filter): void{
     this.tasksService.setFilter(filter)
     this.router.navigate([filter])
   }

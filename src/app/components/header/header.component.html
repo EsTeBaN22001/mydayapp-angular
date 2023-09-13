@@ -7,6 +7,8 @@
       placeholder="Type new todo"
       autofocus
       type="text"
+      [(ngModel)]="inputNewTask"
+      (keydown.enter)="createNewTask()"
     />
   </div>
 </header>

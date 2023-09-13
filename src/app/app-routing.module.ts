@@ -6,7 +6,7 @@ import { HomeComponent } from './pages/home/home.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/all',
+    component: HomeComponent,
     pathMatch: 'full'
   },
   {
@@ -15,7 +15,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '/all'
+    redirectTo: '/'
   }
 ];
 

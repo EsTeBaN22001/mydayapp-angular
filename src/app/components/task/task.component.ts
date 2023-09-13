@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Task } from './../../interfaces/task';
 
 @Component({
@@ -6,13 +6,9 @@ import { Task } from './../../interfaces/task';
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.css']
 })
-export class TaskComponent implements OnInit{
+export class TaskComponent{
 
   @Input() task!: Task
   editing: boolean = false
-
-  ngOnInit(): void {
-    console.log(`Task: ${JSON.stringify(this.task)}`)
-  }
 
 }
