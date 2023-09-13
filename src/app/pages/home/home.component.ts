@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   ) { 
     this.tasksService.tasks$.subscribe( tasks => {
       this.tasks = tasks
-      console.log(this.tasks)
+      // console.log(this.tasks)
     } )
   }
 

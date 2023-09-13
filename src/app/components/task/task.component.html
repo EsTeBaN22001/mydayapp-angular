@@ -1,8 +1,8 @@
 <li [ngClass]="{'completed': task.completed, 'editing': editing}">
   <div class="view">
-    <input class="toggle" type="checkbox" [checked]="task.completed" />
-    <label>{{ task.title }}</label>
-    <button class="destroy"></button>
+    <input class="toggle" type="checkbox" [checked]="task.completed" (click)="checkTask()" />
+    <label (dblclick)="editTask()">{{ task.title }}</label>
+    <button class="destroy" (click)="deleteTask()"></button>
   </div>
-  <input class="edit" [value]="task.title">
+  <input #editInput class="edit" [value]="task.title" (keydown.enter)="saveEditTask()" (keydown.escape)="cancelEditionTask()">
 </li>
