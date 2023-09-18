@@ -60,6 +60,33 @@ export class TasksService {
 
   }
 
+  editTask(editInputValue: string, taskId: string): void{
+
+    const currentTasks = this.tasksBS.value
+
+    const taskIndex = currentTasks.findIndex( t => t.id == taskId)
+
+    if(taskIndex != -1){
+
+      currentTasks[taskIndex].title = editInputValue
+
+      this.tasksBS.next(currentTasks)
+      this.localStorageService.setItem(this.tasksBS.value)
+
+    }
+
+  }
+
+  deleteTask(taskId: string){
+    
+    const currentTasks = this.tasksBS.value
+    const updatedTasks = currentTasks.filter( t => t.id != taskId)
+
+    this.tasksBS.next(updatedTasks)
+    this.localStorageService.setItem(this.tasksBS.value)
+
+  }
+
   changeStatus(task: Task): string | null{
     
     const currentTasks = this.tasksBS.value
@@ -78,16 +105,6 @@ export class TasksService {
     }
 
     return 'Hubo un problema al cambiar el estado de la tarea'
-
-  }
-
-  deleteTask(taskId: string){
-    
-    const currentTasks = this.tasksBS.value
-    const updatedTasks = currentTasks.filter( t => t.id != taskId)
-
-    this.tasksBS.next(updatedTasks)
-    this.localStorageService.setItem(this.tasksBS.value)
 
   }
   
