@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, throwError } from 'rxjs'
+import { BehaviorSubject } from 'rxjs'
 import { Task } from '../interfaces/task';
 import { LocalStorageService } from './local-storage.service';
-import { Filter } from '../interfaces/filter';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +10,6 @@ export class TasksService {
 
   private tasksBS = new BehaviorSubject<Task[]>([])
   tasks$ = this.tasksBS.asObservable()
-
-  private filterBS = new BehaviorSubject<Filter>('all')
-  currentFilter$ = this.filterBS.asObservable()
   
   constructor(
     private localStorageService: LocalStorageService
@@ -25,10 +21,6 @@ export class TasksService {
       this.tasksBS.next(localTasks)
     }
 
-  }
-
-  setFilter(filter: Filter): void{
-    this.filterBS.next(filter)
   }
 
   newTask(title: string):string | null{
@@ -105,6 +97,17 @@ export class TasksService {
     }
 
     return 'Hubo un problema al cambiar el estado de la tarea'
+
+  }
+
+  clearCompleted(): void{
+
+    const currentTasks = this.tasksBS.value
+
+    const cleanedTasks = currentTasks.filter( t => !t.completed)
+
+    this.tasksBS.next(cleanedTasks)
+    this.localStorageService.setItem(this.tasksBS.value)
 
   }
   
